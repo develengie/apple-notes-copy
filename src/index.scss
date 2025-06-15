@@ -33,3 +33,15 @@ ul {
     margin: 0 auto;
     padding: 0 15px;
 }
+
+// Form
+
+.form {
+    &--mb {
+        margin-bottom: 20px;
+    }
+}
+
+.form__group {
+    margin-bottom: 20px;
+}
