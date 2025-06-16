@@ -34,6 +34,15 @@ ul {
     padding: 0 15px;
 }
 
+.text-center {
+    text-align: center;
+}
+
+.toggle-button {
+    color: #0000ff;
+    cursor: pointer;
+}
+
 // Form
 
 .form {
@@ -44,4 +53,21 @@ ul {
 
 .form__group {
     margin-bottom: 20px;
+}
+
+// Page
+
+.page {
+    &--center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+    }
+}
+
+.page__title {
+    margin-bottom: 20px;
+    
+    text-align: center;
 }

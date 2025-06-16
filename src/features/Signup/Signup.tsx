@@ -6,7 +6,11 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { validator } from "../../shared/lib";
 import type { SignupData } from "../../shared/config";
 
-const Signup = () => {
+interface SignupProps {
+    onSubmit: (user: SignupData) => void;
+}
+
+const Signup = ({ onSubmit }: SignupProps) => {
     const [user, setUser] = useState<SignupData>({
         email: "",
         name: "",
@@ -26,7 +30,7 @@ const Signup = () => {
         event.preventDefault();
 
         if (isValid) {
-            console.log(user);
+            onSubmit(user);
             setUser({
                 email: "",
                 name: "",
