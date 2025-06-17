@@ -1,2 +1,3 @@
 import AuthProvider from "./AuthProvider";
-export { AuthProvider };
+import ProtectedRoute from "./ProtectedRoute";
+export { AuthProvider, ProtectedRoute };

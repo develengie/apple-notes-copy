@@ -1,19 +1,27 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useLocation, useParams } from "react-router-dom";
+import { useAuth } from "../../app/providers/AuthProvider";
 import Signup from "../../features/Signup";
 import Signin from "../../features/Signin";
 
 const AuthPage = () => {
+    const location = useLocation();
+    const { isAuth } = useAuth();
     const { type } = useParams();
     const [formType, setFormType] = useState(
         type === "register" ? type : "login"
     );
+    const from = location.state?.from ?? "/notes";
 
     const toggleFormType = () => {
         setFormType((prevState) =>
             prevState === "register" ? "login" : "register"
         );
     };
+
+    if (isAuth) {
+        return <Navigate to={from} />;
+    }
 
     return (
         <div className="page  page--center">
