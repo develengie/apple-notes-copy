@@ -1,21 +1,23 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../app/providers/AuthProvider";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { validator } from "../../shared/lib";
+import { ErrorMessage } from "../../shared/ui";
 import type { SignupData } from "../../shared/config";
 
-interface SignupProps {
-    onSubmit: (user: SignupData) => void;
-}
-
-const Signup = ({ onSubmit }: SignupProps) => {
+const Signup = () => {
+    const navigate = useNavigate();
+    const { signup } = useAuth();
     const [user, setUser] = useState<SignupData>({
         email: "",
         name: "",
         password: "",
     });
+    const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const validateSchema = {
         email: validator.isEmail(user.email),
@@ -26,16 +28,16 @@ const Signup = ({ onSubmit }: SignupProps) => {
         (item) => item === true
     );
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (isValid) {
-            onSubmit(user);
-            setUser({
-                email: "",
-                name: "",
-                password: "",
-            });
+            try {
+                await signup(user);
+                navigate("/notes");
+            } catch (error) {
+                setError(error as string);
+            }
         }
     };
 
@@ -49,6 +51,10 @@ const Signup = ({ onSubmit }: SignupProps) => {
     const handleShowPassword = () => {
         setShowPassword((prevState) => !prevState);
     };
+
+    useEffect(() => {
+        setError("");
+    }, [user]);
 
     return (
         <form className="form  form--mb" onSubmit={handleSubmit}>
@@ -108,14 +114,17 @@ const Signup = ({ onSubmit }: SignupProps) => {
                     }}
                 />
             </div>
-            <Button
-                fullWidth
-                disabled={!isValid}
-                type="submit"
-                variant="contained"
-            >
-                Sign up
-            </Button>
+            <div className="form__group">
+                <Button
+                    fullWidth
+                    disabled={!isValid}
+                    type="submit"
+                    variant="contained"
+                >
+                    Sign up
+                </Button>
+            </div>
+            {error && <ErrorMessage error={error} />}
         </form>
     );
 };

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Signup from "../../features/Signup";
 import Signin from "../../features/Signin";
-import type { SigninData, SignupData } from "../../shared/config";
 
 const AuthPage = () => {
     const { type } = useParams();
@@ -16,10 +15,6 @@ const AuthPage = () => {
         );
     };
 
-    const handleSubmit = (data: SignupData | SigninData) => {
-        console.log(data);
-    };
-
     return (
         <div className="page  page--center">
             <div className="container">
@@ -27,7 +22,7 @@ const AuthPage = () => {
                     {formType === "register" ? (
                         <>
                             <h2 className="page__title">Sign up</h2>
-                            <Signup onSubmit={handleSubmit} />
+                            <Signup />
                             <p className="text-center">
                                 <a
                                     className="toggle-button"
@@ -41,7 +36,7 @@ const AuthPage = () => {
                     ) : (
                         <>
                             <h2 className="page__title">Sign in</h2>
-                            <Signin onSubmit={handleSubmit} />
+                            <Signin />
                             <p className="text-center">
                                 <a
                                     className="toggle-button"
