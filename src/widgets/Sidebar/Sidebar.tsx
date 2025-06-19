@@ -1,5 +1,5 @@
-import { Drawer, List, ListItem, ListItemButton } from "@mui/material";
-import Note from "../../entities/Note";
+import { Drawer, List } from "@mui/material";
+import Notes from "../../entities/Notes";
 
 const Sidebar = () => {
     const notes = [
@@ -24,13 +24,7 @@ const Sidebar = () => {
             variant="permanent"
         >
             <List>
-                {notes.map((note) => (
-                    <ListItem key={note._id} disablePadding>
-                        <ListItemButton>
-                            <Note primary={note.text} secondary={note.date} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                <Notes notes={notes} />
             </List>
         </Drawer>
     );
