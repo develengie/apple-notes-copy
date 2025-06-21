@@ -18,8 +18,8 @@ const Workspace = () => {
     const [value, setValue] = useState("");
     const [isPreview, setIsPreview] = useState(true);
     const [isModal, setIsModal] = useState(false);
-    const currentNote = notes.find((note) => note._id.toString() === noteId);
-    const isNoteExists = notes.some((note) => note._id.toString() === noteId);
+    const currentNote = notes.find((note) => note?._id?.toString() === noteId);
+    const isNoteExists = notes.some((note) => note?._id?.toString() === noteId);
     const autosavedValue = localStorage.getItem("smde_demo") || value;
     const options = useMemo(() => {
         return {
