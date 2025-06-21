@@ -1,0 +1,73 @@
+{
+    "name": "Apple Notes Copy",
+    "short_name": "Apple Notes",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#fff",
+    "orientation": "portrait-primary",
+    "description": "A copy of the Notes application from the macOS operating system",
+    "id": "/",
+    "launch_handler": {
+        "client_mode": "focus-existing"
+    },
+    "dir": "ltr",
+    "iarc_rating_id": "some_iarc_rating_id",
+    "lang": "en",
+    "prefer_related_applications": false,
+    "scope": "/",
+    "icons": [
+        {
+            "src": "/icons/50.png",
+            "type": "image/png",
+            "sizes": "50x50"
+        },
+        {
+            "src": "/icons/72.png",
+            "type": "image/png",
+            "sizes": "72x72"
+        },
+        {
+            "src": "/icons/100.png",
+            "type": "image/png",
+            "sizes": "100x100"
+        },
+        {
+            "src": "/icons/128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "/icons/144.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "/icons/152.png",
+            "type": "image/png",
+            "sizes": "152x152"
+        },
+        {
+            "src": "/icons/192.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/192.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/icons/256.png",
+            "type": "image/png",
+            "sizes": "256x256"
+        },
+        {
+            "src": "/icons/512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
