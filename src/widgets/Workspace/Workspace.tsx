@@ -5,6 +5,7 @@ import SimpleMdeReact, {
 } from "react-simplemde-editor";
 import { Button } from "@mui/material";
 import { useNotes } from "../../app/providers/NotesProvider";
+import { useDebounce } from "../../shared/hooks/useDebounce";
 import Modal from "../../features/Modal";
 import "easymde/dist/easymde.min.css";
 import "./Workspace.scss";
@@ -31,10 +32,17 @@ const Workspace = () => {
         } as SimpleMDEReactProps;
     }, []);
 
+    useDebounce(
+        () => {
+            editNote(noteId!, value);
+        },
+        1000,
+        [noteId!, value]
+    );
+
     const handleChange = useCallback(
         (value: string) => {
             setValue(value);
-            editNote(noteId!, value);
         },
         [noteId]
     );
