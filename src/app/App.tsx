@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { AuthProvider, ProtectedRoute } from "./providers";
+import { AuthProvider, NotesProvider, ProtectedRoute } from "./providers";
 import { MainLayout } from "./layouts";
 import AuthPage from "../pages/AuthPage";
 import NotesPage from "../pages/NotesPage";
@@ -13,9 +13,11 @@ const App = () => {
                     <Route
                         path="/notes/:id?"
                         element={
-                            <ProtectedRoute>
-                                <NotesPage />
-                            </ProtectedRoute>
+                            <NotesProvider>
+                                <ProtectedRoute>
+                                    <NotesPage />
+                                </ProtectedRoute>
+                            </NotesProvider>
                         }
                     />
                     <Route path="*" element={<Navigate to="/" />} />

@@ -4,6 +4,7 @@ import SimpleMdeReact, {
     type SimpleMDEReactProps,
 } from "react-simplemde-editor";
 import { Button } from "@mui/material";
+import { useNotes } from "../../app/providers/NotesProvider";
 import Modal from "../../features/Modal";
 import "easymde/dist/easymde.min.css";
 import "./Workspace.scss";
@@ -11,10 +12,13 @@ import "./Workspace.scss";
 const delay = 1000;
 
 const Workspace = () => {
-    const { id } = useParams();
-    const [value, setValue] = useState(id);
+    const { id: noteId } = useParams();
+    const { notes, addNote, editNote } = useNotes();
+    const [value, setValue] = useState("");
     const [isPreview, setIsPreview] = useState(true);
     const [isModal, setIsModal] = useState(false);
+    const currentNote = notes.find((note) => note._id.toString() === noteId);
+    const isNoteExists = notes.some((note) => note._id.toString() === noteId);
     const autosavedValue = localStorage.getItem("smde_demo") || value;
     const options = useMemo(() => {
         return {
@@ -27,9 +31,17 @@ const Workspace = () => {
         } as SimpleMDEReactProps;
     }, []);
 
-    const handleChange = useCallback((value: string) => {
-        setValue(value);
-    }, []);
+    const handleChange = useCallback(
+        (value: string) => {
+            setValue(value);
+            editNote(noteId!, value);
+        },
+        [noteId]
+    );
+
+    const handleAddNote = () => {
+        addNote(notes.length + 1);
+    };
 
     const handleTogglePreview = () => {
         setIsPreview((prevState) => !prevState);
@@ -52,30 +64,37 @@ const Workspace = () => {
 
     useEffect(() => {
         localStorage.removeItem("smde_demo");
-        setValue(id);
-        localStorage.setItem("smde_demo", id!);
-    }, [id]);
+        setValue(currentNote?.text as string);
+        localStorage.setItem("smde_demo", currentNote?.text as string);
+    }, [noteId]);
 
     return (
         <div className="workspace">
-            {id ? (
-                <>
-                    <SimpleMdeReact
-                        id="demo"
-                        getMdeInstance={getMdeInstance}
-                        options={options}
-                        value={autosavedValue}
-                        onChange={handleChange}
-                    />
+            {noteId && isNoteExists ? (
+                <SimpleMdeReact
+                    id="demo"
+                    getMdeInstance={getMdeInstance}
+                    options={options}
+                    value={autosavedValue}
+                    onChange={handleChange}
+                />
+            ) : (
+                <div className="workspace__message">
+                    Add a new note or select a note on the left
+                </div>
+            )}
 
-                    <div className="workspace__buttons">
-                        <Button
-                            variant="contained"
-                            color="success"
-                            sx={{ mr: 1 }}
-                        >
-                            Add
-                        </Button>
+            <div className="workspace__buttons">
+                <Button
+                    variant="contained"
+                    color="success"
+                    sx={{ mr: 1 }}
+                    onClick={handleAddNote}
+                >
+                    Add
+                </Button>
+                {noteId && isNoteExists && (
+                    <>
                         <Button
                             variant="contained"
                             sx={{ mr: 1 }}
@@ -90,13 +109,17 @@ const Workspace = () => {
                         >
                             Delete
                         </Button>
-                    </div>
-                </>
-            ) : (
-                <div className="workspace__message">Выберите заметку слева</div>
-            )}
+                    </>
+                )}
+            </div>
 
-            <Modal isModal={isModal} onCloseModal={handleCloseModal} />
+            {isModal && (
+                <Modal
+                    isModal={isModal}
+                    onCloseModal={handleCloseModal}
+                    noteId={noteId!}
+                />
+            )}
         </div>
     );
 };

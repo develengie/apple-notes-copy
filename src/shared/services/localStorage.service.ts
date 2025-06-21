@@ -23,11 +23,7 @@ const setAuthData = ({ idToken, refreshToken, localId, name }: AuthData) => {
 };
 
 const removeAuthData = () => {
-    localStorage.removeItem(ID_TOKEN_KEY);
-    localStorage.removeItem(REFRESH_TOKEN_KEY);
-    localStorage.removeItem(EXPIRES_IN_KEY);
-    localStorage.removeItem(LOCAL_ID_KEY);
-    localStorage.removeItem(NAME_KEY);
+    localStorage.clear();
 };
 
 const localStorageService = {

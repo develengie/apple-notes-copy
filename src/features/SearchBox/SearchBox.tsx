@@ -1,6 +1,6 @@
-import { useState, type ChangeEvent } from "react";
 import { darken, InputBase, styled } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import { useNotes } from "../../app/providers/NotesProvider";
 
 const SearchBoxComponent = styled("div")(({ theme }) => ({
     position: "relative",
@@ -44,11 +44,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchBox = () => {
-    const [searchQuery, setSearchQuery] = useState("");
-
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(event.target.value);
-    };
+    const { noteSearch, handleNoteSearch } = useNotes();
 
     return (
         <SearchBoxComponent>
@@ -59,8 +55,8 @@ const SearchBox = () => {
                 placeholder="Search..."
                 inputProps={{ "aria-label": "search" }}
                 type="text"
-                value={searchQuery}
-                onChange={handleChange}
+                value={noteSearch}
+                onChange={handleNoteSearch}
             />
         </SearchBoxComponent>
     );

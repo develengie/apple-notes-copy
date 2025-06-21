@@ -1,8 +1,10 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
+import { useNotes } from "../../app/providers/NotesProvider";
 
 interface ModalComponentProps {
     isModal: boolean;
     onCloseModal: () => void;
+    noteId: string;
 }
 
 const style = {
@@ -17,7 +19,18 @@ const style = {
     textAlign: "center",
 };
 
-const ModalComponent = ({ isModal, onCloseModal }: ModalComponentProps) => {
+const ModalComponent = ({
+    isModal,
+    onCloseModal,
+    noteId,
+}: ModalComponentProps) => {
+    const { deleteNote } = useNotes();
+
+    const handleDeleteNote = () => {
+        deleteNote(noteId);
+        onCloseModal();
+    };
+
     return (
         <Modal
             open={isModal}
@@ -30,7 +43,12 @@ const ModalComponent = ({ isModal, onCloseModal }: ModalComponentProps) => {
                     Are you sure you want to delete this note?
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    <Button variant="contained" color="error" sx={{ mr: 1 }}>
+                    <Button
+                        variant="contained"
+                        color="error"
+                        sx={{ mr: 1 }}
+                        onClick={handleDeleteNote}
+                    >
                         Delete
                     </Button>
                     <Button variant="contained" onClick={onCloseModal}>

@@ -1,14 +1,14 @@
 import { Drawer, List } from "@mui/material";
+import { orderBy } from "lodash";
+import { useNotes } from "../../app/providers/NotesProvider";
 import Notes from "../../entities/Notes";
 
 const Sidebar = () => {
-    const notes = [
-        { _id: 1, text: "Text 1", date: "Jun 1, 2025" },
-        { _id: 2, text: "Text 2", date: "Jun 2, 2025" },
-        { _id: 3, text: "Text 3", date: "Jun 3, 2025" },
-        { _id: 4, text: "Text 4", date: "Jun 4, 2025" },
-        { _id: 5, text: "Text 5", date: "Jun 5, 2025" },
-    ];
+    const { notes, noteSearch } = useNotes();
+    const sortedNotes = orderBy(notes, ["_id"], ["desc"]);
+    const filteredNotes = sortedNotes.filter((note) =>
+        note.text.toLowerCase().includes(noteSearch.toLowerCase())
+    );
 
     return (
         <Drawer
@@ -24,7 +24,7 @@ const Sidebar = () => {
             variant="permanent"
         >
             <List>
-                <Notes notes={notes} />
+                <Notes notes={filteredNotes} />
             </List>
         </Drawer>
     );

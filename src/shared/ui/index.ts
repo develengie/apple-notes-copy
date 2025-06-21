@@ -1,2 +1,3 @@
 import ErrorMessage from "./ErrorMessage/ErrorMessage";
-export { ErrorMessage };
+import Loader from "./Loader/Loader";
+export { ErrorMessage, Loader };

@@ -6,7 +6,12 @@ interface NoteProps {
 }
 
 const Note = ({ primary, secondary }: NoteProps) => {
-    return <ListItemText primary={primary} secondary={secondary} />;
+    return (
+        <ListItemText
+            primary={primary.replace(/[*#>]/g, "")}
+            secondary={secondary}
+        />
+    );
 };
 
 export default Note;
