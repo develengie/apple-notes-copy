@@ -26,4 +26,9 @@
 
 Для хранения данных использована облачная платформа для разработки веб-приложений Firebase.<br>
 
-Приложение переведено на PWA: https://apple-notes-copy.web.app/.
+<hr>
+
+Приложение переведено на PWA: https://apple-notes-copy.web.app/.<br>
+
+Email: a@mail.ru<br>
+Пароль: TEST1234
