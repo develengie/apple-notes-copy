@@ -4,7 +4,9 @@
 -   <a href="https://reactrouter.com/6.30.1/start/tutorial">![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)</a>
 -   <a href="https://www.typescriptlang.org/">![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)</a>
 -   <a href="https://sass-lang.com/">![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)</a>
+-   <a href="https://mui.com/material-ui/">![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)</a>
 -   <a href="https://vite.dev/">![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)</a>
+-   <a href="https://firebase.google.com/">![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)</a>
 
 Создана упрощенная копия приложения «Заметки» из операционной системы macOS с помощью React.<br>
 
